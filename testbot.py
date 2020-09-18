@@ -22,7 +22,6 @@ async def store(ctx, argc, args):
     if len(argc) != 6:
         await ctx.send('code isn\'t 6 characters!')
         return 0
-
     stored_code = argc.upper()
     f = open('newcode.txt',"w")
     f.write(stored_code)
