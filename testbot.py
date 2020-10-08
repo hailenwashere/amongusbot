@@ -11,25 +11,29 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='~')
 
+bruhmoment = 5
+
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
-@bot.command(name='store', help='stores game info, example: ~storecode abcdef NA(capitalize the server)')
+@bot.command(name='store', help='stores game info, example: ~storecode abcdef NA (capitalize the server)')
 async def store(ctx, argc, args):
     print(f'{argc} {args}')
     
     if len(argc) != 6:
         await ctx.send('code isn\'t 6 characters!')
         return 0
+
     stored_code = argc.upper()
     f = open('newcode.txt',"w")
     f.write(stored_code)
     f.close()
 
-    if len(args) != 2 or (args != 'NA' and args != 'EU' and args != 'AS'):
-        await ctx.send("enter the capitalized, two letter abbrev. for the server region! i.e. NA, EU, AS")
+    if len(args) != 2 or (args.upper() != 'NA' and args != 'EU' and args != 'AS'):
+        await ctx.send("enter the two letter abbrev. for the server region! i.e. na, eu, AS")
         return 0
+        
     stored_server = args.upper()
     f = open('newsrv.txt',"w")
     f.write(stored_server)
